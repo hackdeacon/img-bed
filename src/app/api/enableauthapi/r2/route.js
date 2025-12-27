@@ -25,7 +25,8 @@ export async function POST(request) {
 
 
 	const req_url = new URL(request.url);
-	const customDomain = env.CUSTOM_DOMAIN || req_url.origin;
+	const customDomain = env.CUSTOM_DOMAIN;
+	const useCustomDomain = !!customDomain;
 
 	const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || request.socket.remoteAddress;
 	const clientIp = ip ? ip.split(',')[0].trim() : 'IP not found';
@@ -70,8 +71,13 @@ export async function POST(request) {
 				})
 		}
 
+		// 自定义域名直接用域名+文件名，否则用默认路径
+		const finalUrl = useCustomDomain
+			? `${customDomain}/${filename}`
+			: `${req_url.origin}/api/rfile/${filename}`;
+
 		const data = {
-			"url": `${customDomain}/api/rfile/${filename}`,
+			"url": finalUrl,
 			"code": 200,
 			"name": filename
 		}
@@ -87,7 +93,7 @@ export async function POST(request) {
 			})
 		} else {
 			try {
-				const rating_index = await getRating(env, `${customDomain}/api/rfile/${filename}`);
+				const rating_index = await getRating(env, finalUrl);
 				const nowTime = await get_nowTime()
 				await insertImageData(env.IMG, `/rfile/${filename}`, Referer, clientIp, rating_index, nowTime);
 

@@ -39,6 +39,7 @@ export default function Home() {
 
 
   const parentRef = useRef(null);
+  const fileInputRef = useRef(null);
 
 
 
@@ -137,6 +138,11 @@ export default function Home() {
     );
 
     setSelectedFiles([...selectedFiles, ...uniqueFiles]);
+
+    // 清空 input value，允许重复选择相同文件
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleClear = () => {
@@ -615,6 +621,7 @@ export default function Home() {
             选择图片
           </label>
           <input
+            ref={fileInputRef}
             id="file-upload"
             type="file"
             className="hidden"
