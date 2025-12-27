@@ -32,7 +32,6 @@ export async function POST(request) {
 	const fileType = formData.get('file').type;
 
 	const req_url = new URL(request.url);
-	const customDomain = env.CUSTOM_DOMAIN || req_url.origin;
 
 	const fileTypeMap = {
 		'image/': { url: 'sendPhoto', type: 'photo' },
@@ -68,7 +67,7 @@ export async function POST(request) {
 		const fileData = await getFile(responseData);
 
 		const data = {
-			"url": `${customDomain}/api/cfile/${fileData.file_id}`,
+			"url": `${req_url.origin}/api/cfile/${fileData.file_id}`,
 			"code": 200,
 			"name": fileData.file_name
 		}
