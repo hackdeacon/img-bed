@@ -94,7 +94,6 @@ export default function Home() {
 
       } else {
         setisAuthapi(false)
-        setSelectedOption("58img")
       }
 
 
@@ -125,6 +124,10 @@ export default function Home() {
   }
 
   const handleFileChange = (event) => {
+    if (!isAuthapi) {
+      toast.error('请先登录后再选择文件');
+      return;
+    }
     const newFiles = event.target.files;
     const filteredFiles = Array.from(newFiles).filter(file =>
       !selectedFiles.find(selFile => selFile.name === file.name));
@@ -150,6 +153,12 @@ export default function Home() {
 
 
   const handleUpload = async (file = null) => {
+    // Check authentication before upload
+    if (!isAuthapi) {
+      toast.error('请先登录后再上传图片');
+      return;
+    }
+
     setUploading(true);
 
     const filesToUpload = file ? [file] : selectedFiles;
@@ -504,16 +513,24 @@ export default function Home() {
               上传最大 5 MB · 已托管 <span className="text-gray-700">{Total}</span> 张
             </p>
           </div>
-          <select
-            value={selectedOption}
-            onChange={handleSelectChange}
-            className="text-sm px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 w-fit"
-          >
-            {/* <option value="tg">TG(会失效)</option> */}
-            <option value="r2">Cloudflare</option>
-            <option value="tgchannel">Telegram</option>
-            {/* <option value="58img">58img</option> */}
-          </select>
+          <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
+            {[
+              { value: 'r2', label: 'Cloudflare' },
+              { value: 'tgchannel', label: 'Telegram' }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setSelectedOption(option.value)}
+                className={`px-3 py-1 text-sm rounded-md transition-colors ${
+                  selectedOption === option.value
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* 拖拽上传区域 */}

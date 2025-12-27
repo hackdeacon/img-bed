@@ -1,4 +1,5 @@
 export const runtime = 'edge';
+import { auth } from "@/auth";
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
 
@@ -11,6 +12,14 @@ const corsHeaders = {
 };
 
 export async function POST(request) {
+  const session = await auth();
+  if (!session?.user) {
+    return Response.json(
+      { status: "fail", message: "Authentication required", success: false },
+      { status: 401, headers: corsHeaders }
+    );
+  }
+
   const { env, cf, ctx } = getRequestContext();
 
 

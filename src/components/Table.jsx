@@ -164,19 +164,17 @@ export default function Table({ data: initialData = [] }) {
 
     const elementSize = 400;
     return (
-        <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
-                <table className="w-full min-w-[800px]">
-                    <thead className="bg-gray-50 sticky top-0 z-10">
+                <table className="w-full min-w-[900px]">
+                    <thead className="bg-gray-50 sticky top-0 z-10 border-b border-gray-200">
                         <tr>
-                            <th className="py-2.5 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">名称</th>
+                            <th className="py-2.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">名称</th>
                             <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20">预览</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">来源</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">IP</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16">PV</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-16">评分</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-24">操作</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">来源</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">IP</th>
+                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-28">操作</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
@@ -220,12 +218,12 @@ export default function Table({ data: initialData = [] }) {
                                 );
                             }}>
                             {data.map((item, index) => (
-                                <tr key={index} className="hover:bg-gray-50">
-                                    <td onClick={() => handleNameClick(item)} className="py-2.5 px-3 text-sm text-gray-700 truncate max-w-48 cursor-pointer hover:text-gray-900">
+                                <tr key={index} className="hover:bg-gray-50 transition-colors">
+                                    <td onClick={() => handleNameClick(item)} className="py-2.5 px-4 text-sm text-gray-700 truncate max-w-56 cursor-pointer hover:text-gray-900 font-mono">
                                         {item.url}
                                     </td>
                                     <td className="py-2.5 px-3">
-                                        <div className="w-16 h-16 mx-auto rounded-lg overflow-hidden bg-gray-100">
+                                        <div className="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-100 ring-1 ring-gray-200">
                                             {isVideo(getImgUrl(item.url)) ? (
                                                 <PhotoView key={item.url}
                                                     width={elementSize}
@@ -250,21 +248,15 @@ export default function Table({ data: initialData = [] }) {
                                             )}
                                         </div>
                                     </td>
-                                    <td className="py-2.5 px-3 text-sm text-gray-600 max-w-48">{item.time}</td>
-                                    <td className="py-2.5 px-3 text-sm text-gray-600 max-w-48 truncate">
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48">{item.time}</td>
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48 truncate">
                                         <TooltipItem tooltipsText={item.referer} position="bottom">{item.referer}</TooltipItem>
                                     </td>
-                                    <td className="py-2.5 px-3 text-sm text-gray-600 max-w-48 truncate">
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48 truncate font-mono">
                                         <TooltipItem tooltipsText={item.ip} position="bottom">{item.ip}</TooltipItem>
                                     </td>
-                                    <td className="py-2.5 px-3 text-sm text-gray-600 text-center">{item.total}</td>
-                                    <td className="py-2.5 px-3 text-sm text-gray-600 text-center">
-                                        <span className={`inline-flex px-2 py-0.5 text-xs rounded-full ${item.rating === 3 ? 'bg-red-100 text-red-700' : item.rating === 0 ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                                            {item.rating === 3 ? '违规' : item.rating === 0 ? '正常' : '待审'}
-                                        </span>
-                                    </td>
                                     <td className="py-2.5 px-3">
-                                        <div className="flex items-center justify-center gap-2">
+                                        <div className="flex items-center justify-center gap-1.5">
                                             <Switcher initialChecked={item.rating} initName={item.url} />
                                             <button
                                                 onClick={() => handleDelete(item.url)}
@@ -282,8 +274,11 @@ export default function Table({ data: initialData = [] }) {
             </div>
 
             {data.length === 0 && (
-                <div className="py-12 text-center text-gray-400">
-                    暂无数据
+                <div className="py-16 text-center text-gray-400">
+                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                    <p>暂无数据</p>
                 </div>
             )}
 

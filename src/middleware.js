@@ -2,12 +2,12 @@ import { auth } from "@/auth"
 
 
 const ROOT = '/';
-const PUBLIC_ROUTES = ['/'];
 const DEFAULT_REDIRECT = '/login';
 const LOGIN = '/login'
 const API_ADMIN = "/api/admin"
 const ADMIN_PAGE = "/admin"
 const AUTH_API = "/api/enableauthapi"
+const HOME = "/"
 const enableAuthapi = process.env.ENABLE_AUTH_API === 'true';
 
 export default auth(async (req) => {
@@ -23,6 +23,7 @@ export default auth(async (req) => {
     const isADMIN_PAGE = nextUrl.pathname.startsWith(ADMIN_PAGE);
 
     const isAuthAPI = nextUrl.pathname.startsWith(AUTH_API);
+    const isHome = nextUrl.pathname === HOME;
 
     if (!isAuthenticated) {
         if (isAPI_ADMIN) {
@@ -32,6 +33,9 @@ export default auth(async (req) => {
             )
         }
         else if (isADMIN_PAGE) {
+            return Response.redirect(new URL(LOGIN, nextUrl));
+        }
+        else if (isHome) {
             return Response.redirect(new URL(LOGIN, nextUrl));
         }
         else if (isAuthAPI) {
@@ -71,6 +75,7 @@ export const config = {
     matcher: [
         "/admin/:path*",
         "/api/admin/:path*",
-        "/api/enableauthapi/:path*"
+        "/api/enableauthapi/:path*",
+        "/"
     ],
 };
