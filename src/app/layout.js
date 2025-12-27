@@ -17,8 +17,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @media (prefers-color-scheme: dark) {
+                html { background-color: #000; }
+              }
+              html { background-color: #f9fafb; }
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.className} antialiased`}>{children}</body>
       <GoogleAnalytics gaId="G-JVKEXR5XSG" />
     </html>
   );

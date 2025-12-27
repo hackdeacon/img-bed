@@ -102,19 +102,19 @@ export default function Admin() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 dark:bg-black transition-colors">
       {/* 顶部导航 */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+      <header className="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
           {/* 左侧：视图切换和搜索 */}
           <div className="flex items-center gap-3">
-            <div className="flex bg-gray-100 p-1 rounded-lg">
+            <div className="flex bg-gray-100 dark:bg-gray-900 p-1 rounded-lg">
               <button
                 onClick={handleViewToggle}
                 className={`px-3 py-1.5 text-sm rounded-md transition-colors flex items-center gap-1.5 ${
                   view === 'list'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 }`}
               >
                 <FontAwesomeIcon icon={view === 'list' ? faFileAlt : faList} className="w-3.5 h-3.5" />
@@ -127,12 +127,12 @@ export default function Admin() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="text-sm px-3 py-1.5 border border-gray-200 rounded-lg w-40 focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white"
+                className="text-sm px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg w-40 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
                 placeholder="搜索名称..."
               />
               <button
                 type="submit"
-                className="p-1.5 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors"
               >
                 <FontAwesomeIcon icon={faSearch} className="w-4 h-4" />
               </button>
@@ -142,13 +142,13 @@ export default function Admin() {
           {/* 右侧：导航按钮 */}
           <div className="flex items-center gap-1">
             <Link href="/">
-              <button className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors" title="返回首页">
+              <button className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors" title="返回首页">
                 <FontAwesomeIcon icon={faHome} className="w-4 h-4" />
               </button>
             </Link>
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors" title="退出登录"
+              className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors" title="退出登录"
             >
               <FontAwesomeIcon icon={faSignOutAlt} className="w-4 h-4" />
             </button>
@@ -162,35 +162,35 @@ export default function Admin() {
       </div>
 
       {/* 分页 */}
-      <div className="sticky bottom-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 py-3">
+      <div className="sticky bottom-0 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800 py-3">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-2">
           <button
             onClick={handlePrevPage}
             disabled={currentPage === 1}
-            className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             上一页
           </button>
-          <span className="text-sm text-gray-500 px-2">
+          <span className="text-sm text-gray-500 dark:text-gray-400 px-2">
             {currentPage} / {searchTotal}
           </span>
           <button
             onClick={handleNextPage}
-            className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+            className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
           >
             下一页
           </button>
-          <div className="flex items-center gap-1.5 ml-2 border-l border-gray-200 pl-3">
+          <div className="flex items-center gap-1.5 ml-2 border-l border-gray-200 dark:border-gray-800 pl-3">
             <input
               type="number"
               value={inputPage}
               onChange={(e) => setInputPage(e.target.value)}
-              className="text-sm px-2 py-1.5 border border-gray-200 rounded-lg w-14 text-center focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white"
+              className="text-sm px-2 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg w-14 text-center focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
               min="1"
             />
             <button
               onClick={handleJumpPage}
-              className="px-3 py-1.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg transition-colors"
+              className="px-3 py-1.5 text-sm bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700 text-white rounded-lg transition-colors"
             >
               跳转
             </button>
@@ -198,7 +198,7 @@ export default function Admin() {
         </div>
       </div>
 
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </main>
   )
 }

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Switcher from '@/components/SwitchButton';
 import { toast } from "react-toastify";
 import React, { useRef } from 'react';
 import TooltipItem from '@/components/Tooltip';
@@ -164,20 +163,20 @@ export default function Table({ data: initialData = [] }) {
 
     const elementSize = 400;
     return (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-black rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[900px]">
-                    <thead className="bg-gray-50 sticky top-0 z-10 border-b border-gray-200">
+                    <thead className="bg-gray-50 dark:bg-gray-900/50 sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
                         <tr>
-                            <th className="py-2.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">名称</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-20">预览</th>
-                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
-                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">来源</th>
-                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">IP</th>
-                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-28">操作</th>
+                            <th className="py-2.5 px-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">名称</th>
+                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-20">预览</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">时间</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">来源</th>
+                            <th className="py-2.5 px-4 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">IP</th>
+                            <th className="py-2.5 px-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-28">操作</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                         <PhotoProvider
                             maskOpacity={0.6}
                             toolbarRender={({ rotate, onRotate, onScale, scale }) => {
@@ -218,12 +217,12 @@ export default function Table({ data: initialData = [] }) {
                                 );
                             }}>
                             {data.map((item, index) => (
-                                <tr key={index} className="hover:bg-gray-50 transition-colors">
-                                    <td onClick={() => handleNameClick(item)} className="py-2.5 px-4 text-sm text-gray-700 truncate max-w-56 cursor-pointer hover:text-gray-900 font-mono">
+                                <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                                    <td onClick={() => handleNameClick(item)} className="py-2.5 px-4 text-sm text-gray-700 dark:text-gray-300 truncate max-w-56 cursor-pointer hover:text-gray-900 dark:hover:text-white font-mono">
                                         {item.url}
                                     </td>
                                     <td className="py-2.5 px-3">
-                                        <div className="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-100 ring-1 ring-gray-200">
+                                        <div className="w-14 h-14 mx-auto rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800">
                                             {isVideo(getImgUrl(item.url)) ? (
                                                 <PhotoView key={item.url}
                                                     width={elementSize}
@@ -233,7 +232,7 @@ export default function Table({ data: initialData = [] }) {
                                                         const offset = (width - elementSize) / elementSize;
                                                         const childScale = scale === 1 ? scale + offset : 1 + offset;
                                                         return (
-                                                            <div {...attrs} className={`flex-none bg-white ${attrs.className || ''}`}>
+                                                            <div {...attrs} className={`flex-none bg-white dark:bg-black ${attrs.className || ''}`}>
                                                                 {renderFile(getImgUrl(item.url), index)}
                                                             </div>
                                                         )
@@ -248,19 +247,18 @@ export default function Table({ data: initialData = [] }) {
                                             )}
                                         </div>
                                     </td>
-                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48">{item.time}</td>
-                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48 truncate">
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 dark:text-gray-400 max-w-48">{item.time}</td>
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 dark:text-gray-400 max-w-48 truncate">
                                         <TooltipItem tooltipsText={item.referer} position="bottom">{item.referer}</TooltipItem>
                                     </td>
-                                    <td className="py-2.5 px-4 text-sm text-gray-600 max-w-48 truncate font-mono">
+                                    <td className="py-2.5 px-4 text-sm text-gray-600 dark:text-gray-400 max-w-48 truncate font-mono">
                                         <TooltipItem tooltipsText={item.ip} position="bottom">{item.ip}</TooltipItem>
                                     </td>
                                     <td className="py-2.5 px-3">
-                                        <div className="flex items-center justify-center gap-1.5">
-                                            <Switcher initialChecked={item.rating} initName={item.url} />
+                                        <div className="flex items-center justify-center">
                                             <button
                                                 onClick={() => handleDelete(item.url)}
-                                                className="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded transition-colors"
+                                                className="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 rounded transition-colors"
                                             >
                                                 删除
                                             </button>
@@ -274,20 +272,20 @@ export default function Table({ data: initialData = [] }) {
             </div>
 
             {data.length === 0 && (
-                <div className="py-16 text-center text-gray-400">
-                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="py-16 text-center text-gray-400 dark:text-gray-500">
+                    <svg className="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                     </svg>
-                    <p>暂无数据</p>
+                    <p className="text-gray-500 dark:text-gray-400">暂无数据</p>
                 </div>
             )}
 
             {modalData && (
                 <div onClick={handleClickOutside} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-                    <div ref={modalRef} className="bg-white rounded-xl shadow-xl w-full max-w-md">
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                            <h3 className="text-sm font-medium text-gray-900">复制链接</h3>
-                            <button onClick={handleCloseModal} className="text-gray-400 hover:text-gray-600">
+                    <div ref={modalRef} className="bg-white dark:bg-black rounded-xl shadow-xl w-full max-w-md border border-gray-200 dark:border-gray-800">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                            <h3 className="text-sm font-medium text-gray-900 dark:text-white">复制链接</h3>
+                            <button onClick={handleCloseModal} className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -300,12 +298,12 @@ export default function Table({ data: initialData = [] }) {
                                 { label: 'HTML', text: `<img src="${getImgUrl(modalData.url)}" />` },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-2">
-                                    <span className="text-xs text-gray-400 w-16 flex-shrink-0">{item.label}</span>
+                                    <span className="text-xs text-gray-400 dark:text-gray-500 w-16 flex-shrink-0">{item.label}</span>
                                     <input
                                         readOnly
                                         value={item.text}
                                         onClick={() => handleCopy(item.text)}
-                                        className="flex-1 text-xs px-2 py-1.5 bg-gray-50 border border-gray-100 rounded text-gray-600 focus:outline-none cursor-pointer truncate"
+                                        className="flex-1 text-xs px-2 py-1.5 bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded text-gray-600 dark:text-gray-300 focus:outline-none cursor-pointer truncate"
                                     />
                                 </div>
                             ))}

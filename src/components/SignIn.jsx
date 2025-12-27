@@ -36,34 +36,34 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-50 dark:bg-black transition-colors">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">
           Sign in to your account
         </h1>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium leading-6 text-gray-900" htmlFor="username">Username</label>
+              <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" htmlFor="username">Username</label>
               <div className="mt-2">
                 <input
                   id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:focus:ring-gray-700 sm:text-sm sm:leading-6 bg-white dark:bg-gray-900"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-gray-900" htmlFor="password">Password</label>
+              <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" htmlFor="password">Password</label>
               <div className="mt-2">
                 <input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:focus:ring-gray-700 sm:text-sm sm:leading-6 bg-white dark:bg-gray-900"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ export function LoginPage() {
           </form>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer position="bottom-right"/>
     </div>
   );
 }

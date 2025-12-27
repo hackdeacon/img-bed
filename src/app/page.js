@@ -14,7 +14,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 const LoginButton = ({ onClick, href, children }) => (
   <button
     onClick={onClick}
-    className="px-4 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+    className="px-4 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
   >
     {children}
   </button>
@@ -491,13 +491,13 @@ export default function Home() {
 
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 dark:bg-black transition-colors">
       {/* 顶部导航 */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm">
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="https://pic.hackdeacon.cn/hack.png" alt="Logo" className="w-7 h-7" />
-            <span className="text-base font-medium text-gray-900 tracking-tight">黑影胶片</span>
+            <span className="text-base font-medium text-gray-900 dark:text-white tracking-tight">黑影胶片</span>
           </div>
           {renderButton()}
         </div>
@@ -508,12 +508,12 @@ export default function Home() {
         {/* 上传接口选择 */}
         <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex flex-col">
-            <h2 className="text-base sm:text-base font-medium text-gray-900">图片或视频上传</h2>
-            <p className="text-xs text-gray-500 mt-0.5">
-              上传最大 5 MB · 已托管 <span className="text-gray-700">{Total}</span> 张
+            <h2 className="text-base sm:text-base font-medium text-gray-900 dark:text-white">图片或视频上传</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              上传最大 5 MB · 已托管 <span className="text-gray-700 dark:text-gray-300">{Total}</span> 张
             </p>
           </div>
-          <div className="flex gap-1 bg-gray-100 p-1 rounded-lg">
+          <div className="flex gap-1 bg-gray-100 dark:bg-gray-900 p-1 rounded-lg">
             {[
               { value: 'r2', label: 'Cloudflare' },
               { value: 'tgchannel', label: 'Telegram' }
@@ -523,8 +523,8 @@ export default function Home() {
                 onClick={() => setSelectedOption(option.value)}
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   selectedOption === option.value
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 }`}
               >
                 {option.label}
@@ -535,7 +535,7 @@ export default function Home() {
 
         {/* 拖拽上传区域 */}
         <div
-          className="relative bg-white rounded-xl border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors min-h-[160px] sm:min-h-[200px]"
+          className="relative bg-white dark:bg-black rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-colors min-h-[160px] sm:min-h-[200px]"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onPaste={handlePaste}
@@ -545,7 +545,7 @@ export default function Home() {
             {selectedFiles.map((file, index) => (
               <div key={index} className="relative group">
                 <div
-                  className="w-28 h-28 sm:w-40 sm:h-40 rounded-xl overflow-hidden bg-gray-100 cursor-pointer"
+                  className="w-28 h-28 sm:w-40 sm:h-40 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 cursor-pointer"
                   onClick={() => handleImageClick(index)}
                 >
                   {file.type.startsWith('image/') && (
@@ -594,7 +594,7 @@ export default function Home() {
 
             {selectedFiles.length === 0 && (
               <div className="w-full flex items-center justify-center h-[104px] sm:h-[136px]">
-                <div className="text-center text-gray-400">
+                <div className="text-center text-gray-400 dark:text-gray-500">
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 mb-2 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -609,7 +609,7 @@ export default function Home() {
         <div className="mt-3 sm:mt-4 flex flex-wrap items-center gap-2 sm:gap-4">
           <label
             htmlFor="file-upload"
-            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 hover:bg-gray-800 text-white text-xs sm:text-sm font-medium rounded-lg cursor-pointer transition-colors flex items-center gap-1.5 sm:gap-2"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700 text-white text-xs sm:text-sm font-medium rounded-lg cursor-pointer transition-colors flex items-center gap-1.5 sm:gap-2"
           >
             <FontAwesomeIcon icon={faImages} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             选择图片
@@ -621,12 +621,12 @@ export default function Home() {
             onChange={handleFileChange}
             multiple
           />
-          <span className="text-xs sm:text-sm text-gray-500">
+          <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             {selectedFiles.length} 张 ({getTotalSizeInMB(selectedFiles)} MB)
           </span>
           <div className="flex-1"></div>
           <button
-            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
             onClick={handleClear}
           >
             清除
@@ -634,8 +634,8 @@ export default function Home() {
           <button
             className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-white rounded-lg transition-colors ${
               uploading
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-gray-900 hover:bg-gray-800'
+                ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed'
+                : 'bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700'
             }`}
             onClick={() => handleUpload()}
             disabled={uploading}
@@ -644,13 +644,13 @@ export default function Home() {
           </button>
         </div>
 
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
 
         {/* 已上传图片区域 */}
         {uploadedImages.length > 0 && (
           <div className="mt-6 sm:mt-8">
             {/* Tab 切换 */}
-            <div className="flex gap-1 sm:gap-2 mb-4 border-b border-gray-200 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="flex gap-1 sm:gap-2 mb-4 border-b border-gray-200 dark:border-gray-800 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
               {[
                 { key: 'preview', label: '预览' },
                 { key: 'htmlLinks', label: 'HTML' },
@@ -663,8 +663,8 @@ export default function Home() {
                   onClick={() => setActiveTab(tab.key)}
                   className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                     activeTab === tab.key
-                      ? 'text-gray-900 border-gray-900'
-                      : 'text-gray-500 border-transparent hover:text-gray-700'
+                      ? 'text-gray-900 dark:text-white border-gray-900 dark:border-gray-100'
+                      : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-gray-700 dark:hover:text-gray-200'
                   }`}
                 >
                   {tab.label}
@@ -676,9 +676,9 @@ export default function Home() {
             {activeTab === 'preview' && (
               <div className="space-y-3 sm:space-y-4">
                 {uploadedImages.map((data, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-xl border border-gray-100">
+                  <div key={index} className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-3 sm:p-4 bg-white dark:bg-black rounded-xl border border-gray-100 dark:border-gray-800">
                     <div
-                      className="w-full sm:w-24 sm:h-24 aspect-square sm:aspect-auto flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 cursor-pointer"
+                      className="w-full sm:w-24 sm:h-24 aspect-square sm:aspect-auto flex-shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 cursor-pointer"
                       onClick={() => handlerenderImageClick(data.url, data.type.startsWith('video/') ? 'video' : 'img')}
                     >
                       {data.type.startsWith('image/') ? (
@@ -694,12 +694,12 @@ export default function Home() {
                         { label: 'HTML', value: `<img src="${data.url}" />` },
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          <span className="text-xs text-gray-400 w-12 sm:w-16 flex-shrink-0">{item.label}</span>
+                          <span className="text-xs text-gray-400 dark:text-gray-500 w-12 sm:w-16 flex-shrink-0">{item.label}</span>
                           <input
                             readOnly
                             value={item.value}
                             onClick={() => handleCopy(item.value)}
-                            className="flex-1 text-xs px-2 py-1 bg-gray-50 rounded border border-gray-100 text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-200 cursor-pointer truncate"
+                            className="flex-1 text-xs px-2 py-1 bg-gray-50 dark:bg-gray-900 rounded border border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 cursor-pointer truncate"
                           />
                         </div>
                       ))}
@@ -713,7 +713,7 @@ export default function Home() {
             {activeTab !== 'preview' && (
               <div
                 ref={parentRef}
-                className="p-4 bg-white rounded-xl border border-gray-100 space-y-2 cursor-pointer"
+                className="p-4 bg-white dark:bg-black rounded-xl border border-gray-100 dark:border-gray-800 space-y-2 cursor-pointer"
                 onClick={handleCopyCode}
               >
                 {uploadedImages.map((data, index) => {
@@ -724,12 +724,12 @@ export default function Home() {
                     viewLinks: data.url,
                   };
                   return (
-                    <code key={index} className="block text-xs text-gray-600 break-all">
+                    <code key={index} className="block text-xs text-gray-600 dark:text-gray-300 break-all">
                       {formats[activeTab]}
                     </code>
                   );
                 })}
-                <p className="text-xs text-gray-400 pt-2 text-center">点击复制全部</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 pt-2 text-center">点击复制全部</p>
               </div>
             )}
           </div>
@@ -739,7 +739,7 @@ export default function Home() {
       {/* 图片预览弹窗 */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={handleCloseImage}
         >
           <button
