@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Toastify 字体样式 */
+.Toastify__toast {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace !important;
+  font-size: 14px;
+}
+
+.Toastify__toast-body {
+  font-weight: 500 !important;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

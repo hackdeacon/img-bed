@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const updateRating  = async (initName, rating) => {
@@ -48,7 +48,7 @@ const Switcher = ({ initialChecked, initName }) => {
 
 
   return (
-    <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
+    <label className="relative inline-flex cursor-pointer select-none items-center">
       <input
         type="checkbox"
         name="autoSaver"
@@ -58,16 +58,12 @@ const Switcher = ({ initialChecked, initName }) => {
         disabled={!isDisabled}
       />
       <span
-        className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${isChecked ? 'bg-blue-600' : 'bg-[#CCCCCE]'}`}
+        className={`flex h-5 w-9 items-center rounded-full p-0.5 duration-200 ${isChecked ? 'bg-red-500' : 'bg-gray-300'} ${!isDisabled ? 'opacity-50' : ''}`}
       >
         <span
-          className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${isChecked ? 'translate-x-6' : ''}`}
+          className={`h-4 w-4 rounded-full bg-white duration-200 shadow-sm ${isChecked ? 'translate-x-4' : ''}`}
         ></span>
       </span>
-
-      {/* <span className="label flex items-center text-sm font-medium text-black">
-               <span className="pl-1"> {isChecked ? 'On' : 'Off'} </span>
-      </span> */}
     </label>
   );
 };

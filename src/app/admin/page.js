@@ -4,7 +4,8 @@ import Table from "@/components/Table"
 import { useState, useEffect, useCallback } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Link from 'next/link'
-// import { toast } from "react-toastify";
+import { faList, faFileAlt, faSearch, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -101,61 +102,95 @@ export default function Admin() {
   };
 
   return (
-    <>
-      <div className="overflow-auto h-full flex w-full min-h-screen flex-col items-center justify-between">
-        <header className="fixed top-0 h-[50px]  left-0 w-full border-b bg-white flex z-50 justify-center items-center">
-          <div className="flex justify-between items-center w-full max-w-4xl px-4">
-            <button className='text-white px-4 py-2  transition ease-in-out delay-150 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-300  rounded '
-              onClick={handleViewToggle}>
-              切换到 {view === 'list' ? '日志页' : '数据页'}
+    <main className="min-h-screen bg-gray-50">
+      {/* 顶部导航 */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleViewToggle}
+              className="px-3 py-1.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <FontAwesomeIcon icon={view === 'list' ? faFileAlt : faList} className="w-3.5 h-3.5" />
+              {view === 'list' ? '日志页' : '数据页'}
             </button>
-            <form onSubmit={handleSearch} className="hidden sm:flex items-center">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="border rounded p-2 w-40 mr-2"
-                placeholder="搜索"
-              />
-              <button type="submit" className="text-white px-4 py-2 transition ease-in-out delay-150 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-300 rounded">
-                搜索
-              </button>
-            </form>
           </div>
-          <Link href="/"  className="hidden sm:flex"> <button className="px-4 py-2 mx-2 w-28  sm:w-28 md:w-20 lg:w-16 xl:w-16  2xl:w-20 bg-blue-500 text-white rounded ">主页</button></Link>
-          <button onClick={() => signOut({ callbackUrl: "/" })} className="px-4 py-2 mx-2 w-28  sm:w-28 md:w-20 lg:w-16 xl:w-16  2xl:w-20 bg-blue-500 text-white rounded ">登出</button>
-        </header>
 
-        <main className="my-[60px] w-9/10  sm:w-9/10 md:w-9/10 lg:w-9/10 xl:w-3/5 2xl:w-full">
-
-          <Table data={listData} />
-
-        </main>
-        <div className="fixed inset-x-0 bottom-0 h-[50px]  w-full  flex  z-50 justify-center items-center bg-white ">
-          <div className="pagination mt-5 mb-5 flex justify-center items-center">
-            <button className=' text-xs sm:text-sm transition ease-in-out delay-150 bg-blue-500  hover:scale-110 hover:bg-indigo-500 duration-300p-2 p-2 rounded mr-5' onClick={handlePrevPage} disabled={currentPage === 1}>
-              上一页
+          <form onSubmit={handleSearch} className="flex items-center gap-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="text-sm px-3 py-1.5 border border-gray-200 rounded-lg w-32 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              placeholder="搜索..."
+            />
+            <button
+              type="submit"
+              className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+            >
+              <FontAwesomeIcon icon={faSearch} className="w-3.5 h-3.5" />
             </button>
-            <span className="text-xs sm:text-sm">第 {`${currentPage}/${searchTotal}`} 页</span>
-            <button className='text-xs sm:text-sm transition ease-in-out delay-150 bg-blue-500  hover:scale-110 hover:bg-indigo-500 duration-300 p-2 rounded ml-5' onClick={handleNextPage}>
-              下一页</button>
-            <div className="ml-5 flex items-center">
-              <input
-                type="number"
-                value={inputPage}
-                onChange={(e) => setInputPage(e.target.value)}
-                className="border rounded p-2 w-20"
-                placeholder="页码"
-              />
-              <button className='text-xs sm:text-sm transition ease-in-out delay-150 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-300 p-2 rounded ml-2' onClick={handleJumpPage}>
-                跳转
+          </form>
+
+          <div className="flex items-center gap-2">
+            <Link href="/">
+              <button className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                <FontAwesomeIcon icon={faHome} className="w-4 h-4" />
               </button>
-            </div>
+            </Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} className="w-4 h-4" />
+            </button>
           </div>
         </div>
-        <ToastContainer />
-      </div>
-    </>
+      </header>
 
+      {/* 主要内容 */}
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <Table data={listData} />
+      </div>
+
+      {/* 分页 */}
+      <div className="sticky bottom-0 bg-white/80 backdrop-blur-sm border-t border-gray-100 py-3">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-center gap-3">
+          <button
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            上一页
+          </button>
+          <span className="text-sm text-gray-500">
+            {currentPage} / {searchTotal}
+          </span>
+          <button
+            onClick={handleNextPage}
+            className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+          >
+            下一页
+          </button>
+          <div className="flex items-center gap-2 ml-3">
+            <input
+              type="number"
+              value={inputPage}
+              onChange={(e) => setInputPage(e.target.value)}
+              className="text-sm px-2 py-1.5 border border-gray-200 rounded-lg w-16 text-center focus:outline-none focus:ring-2 focus:ring-gray-200"
+              min="1"
+            />
+            <button
+              onClick={handleJumpPage}
+              className="px-3 py-1.5 text-sm bg-gray-900 hover:bg-gray-800 text-white rounded-lg transition-colors"
+            >
+              跳转
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ToastContainer />
+    </main>
   )
 }
