@@ -47,13 +47,36 @@ body {
 
 /* 滚动条轨道 */
 ::-webkit-scrollbar-track {
-  background-color: #ffffff; /* 设置滚动条轨道的背景颜色 */
+  background-color: rgb(249 250 251); /* light mode - gray-50 */
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background-color: rgb(17 24 39); /* dark mode - gray-900 */
+  }
 }
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-  background-color: #c2c2c2; /* 设置滚动条滑块的背景颜色 */
+  background-color: rgb(194 194 194); /* light mode - gray-300 */
   border-radius: 10px; /* 设置滚动条滑块的圆角 */
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(75 85 99); /* dark mode - gray-600 */
+  }
+}
+
+/* 鼠标悬停在滑块上的样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(156 163 175); /* light mode hover - gray-400 */
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(107 114 128); /* dark mode hover - gray-500 */
+  }
 }
 
 
@@ -66,21 +89,38 @@ body {
 /* 滚动条样式 */
 .overflow-container::-webkit-scrollbar {
   width: 10px; /* 设置滚动条宽度 */
-  background-color: #f5f5f5; /* 设置滚动条背景色 */
 }
 
 /* 滚动条轨道 */
 .overflow-container::-webkit-scrollbar-track {
-  background-color: #f5f5f5; /* 设置滚动条轨道背景色 */
+  background-color: rgb(245 245 245); /* light mode - gray-100 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .overflow-container::-webkit-scrollbar-track {
+    background-color: rgb(31 41 55); /* dark mode - gray-800 */
+  }
 }
 
 /* 滚动条滑块 */
 .overflow-container::-webkit-scrollbar-thumb {
-  background-color: #888; /* 设置滚动条滑块背景色 */
+  background-color: rgb(136 136 136); /* light mode - gray-500 */
   border-radius: 4px; /* 设置滑块圆角 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .overflow-container::-webkit-scrollbar-thumb {
+    background-color: rgb(107 114 128); /* dark mode - gray-500 */
+  }
 }
 
 /* 鼠标悬停在滑块上的样式 */
 .overflow-container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* 设置滑块悬停时的背景色 */
+  background-color: rgb(85 85 85); /* light mode hover - gray-600 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .overflow-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(156 163 175); /* dark mode hover - gray-400 */
+  }
 }

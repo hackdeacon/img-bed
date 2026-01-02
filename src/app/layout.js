@@ -9,7 +9,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "黑影胶片",
+  title: "Hack Gallery",
   description: "图床",
 };
 
@@ -18,19 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              @media (prefers-color-scheme: dark) {
-                html { background-color: #000; }
-              }
-              html { background-color: #f9fafb; }
-            `,
-          }}
-        />
-      </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased bg-gray-50 dark:bg-gray-900 transition-colors`}>{children}</body>
       <GoogleAnalytics gaId="G-JVKEXR5XSG" />
     </html>
   );
